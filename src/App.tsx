@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { DecaLogo } from './components/DecaLogo';
-import { Mail, Phone, MapPin, Linkedin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Send, Menu, X } from 'lucide-react';
 
 export default function App() {
   const [lang, setLang] = useState<'sv' | 'en'>('sv');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -94,48 +95,64 @@ export default function App() {
     }
   };
 
+  const handleNavigation = (section: string) => {
+    setMenuOpen(false);
+
+    setTimeout(() => {
+      document.getElementById(section)?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }, 50);
+  };
+
   return (
     <div className="min-h-screen bg-[#102A43] text-[#E5E7EB] font-sans flex flex-col justify-between selection:bg-emerald-400 selection:text-black">
 
-      {/* 1. BARRA SUPERIOR CON LOGO Y SELECTOR DE IDIOMA */}
+      {/* 1. BARRA SUPERIOR */}
       <header className="border-b border-neutral-800/80 sticky top-0 bg-[#102A43]/95 backdrop-blur z-30">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 min-h-20 sm:h-20 flex items-center justify-between gap-3">
 
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+          {/* LOGO */}
           <a
             href="#"
             aria-label="DECA Energy - Home"
             className="flex items-center shrink-0"
+            onClick={() => setMenuOpen(false)}
           >
             <DecaLogo size="sm" theme="dark" />
           </a>
 
-          <div className="flex items-center gap-2 sm:gap-6">
+          {/* DESKTOP NAVIGATION */}
+          <div className="hidden sm:flex items-center gap-6">
+
             <nav
               aria-label="Main Navigation"
-              className="flex items-center gap-2 sm:gap-6 text-[10px] sm:text-sm font-mono text-neutral-400"
+              className="flex items-center gap-6 text-sm font-mono text-neutral-400"
             >
               <a
                 href="#about"
-                className="hover:text-emerald-400 py-2 px-1 transition-colors whitespace-nowrap"
+                className="hover:text-emerald-400 py-2 px-1 transition-colors"
               >
                 {content.about}
               </a>
 
               <a
                 href="#services"
-                className="hover:text-emerald-400 py-2 px-1 transition-colors whitespace-nowrap"
+                className="hover:text-emerald-400 py-2 px-1 transition-colors"
               >
                 {content.services}
               </a>
 
               <a
                 href="#contact"
-                className="hover:text-emerald-400 py-2 px-1 transition-colors whitespace-nowrap"
+                className="hover:text-emerald-400 py-2 px-1 transition-colors"
               >
                 {content.contact}
               </a>
             </nav>
 
+            {/* LANGUAGE SELECTOR DESKTOP */}
             <div
               className="flex items-center gap-1 bg-neutral-900 border border-neutral-800 rounded-full px-2.5 py-1 text-xs font-mono shrink-0"
               role="group"
@@ -146,7 +163,7 @@ export default function App() {
                 onClick={() => setLang('sv')}
                 aria-label="Välj svenska"
                 aria-pressed={lang === 'sv'}
-                className={`px-2.5 py-1 rounded-full transition-colors min-h-[32px] sm:min-h-0 flex items-center justify-center ${
+                className={`px-2.5 py-1 rounded-full transition-colors ${
                   lang === 'sv'
                     ? 'bg-emerald-400 text-neutral-950 font-bold'
                     : 'text-neutral-400 hover:text-white'
@@ -162,7 +179,7 @@ export default function App() {
                 onClick={() => setLang('en')}
                 aria-label="Select English"
                 aria-pressed={lang === 'en'}
-                className={`px-2.5 py-1 rounded-full transition-colors min-h-[32px] sm:min-h-0 flex items-center justify-center ${
+                className={`px-2.5 py-1 rounded-full transition-colors ${
                   lang === 'en'
                     ? 'bg-emerald-400 text-neutral-950 font-bold'
                     : 'text-neutral-400 hover:text-white'
@@ -172,7 +189,112 @@ export default function App() {
               </button>
             </div>
           </div>
+
+          {/* MOBILE CONTROLS */}
+          <div className="flex sm:hidden items-center gap-3">
+
+            {/* LANGUAGE SELECTOR MOBILE */}
+            <div
+              className="flex items-center gap-1 bg-neutral-900 border border-neutral-800 rounded-full px-2 py-1 text-xs font-mono"
+              role="group"
+              aria-label="Language selector"
+            >
+              <button
+                type="button"
+                onClick={() => setLang('sv')}
+                aria-label="Välj svenska"
+                aria-pressed={lang === 'sv'}
+                className={`px-2 py-1 rounded-full transition-colors min-h-[30px] flex items-center justify-center ${
+                  lang === 'sv'
+                    ? 'bg-emerald-400 text-neutral-950 font-bold'
+                    : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                SV
+              </button>
+
+              <span className="text-neutral-600 select-none">/</span>
+
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                aria-label="Select English"
+                aria-pressed={lang === 'en'}
+                className={`px-2 py-1 rounded-full transition-colors min-h-[30px] flex items-center justify-center ${
+                  lang === 'en'
+                    ? 'bg-emerald-400 text-neutral-950 font-bold'
+                    : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+
+            {/* MOBILE MENU BUTTON */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              className="w-10 h-10 flex items-center justify-center rounded border border-neutral-800 bg-neutral-900 text-neutral-300 hover:text-emerald-400 hover:border-neutral-700 transition-colors"
+            >
+              {menuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
+
+          </div>
         </div>
+
+        {/* MOBILE DROPDOWN MENU */}
+        <div
+          className={`sm:hidden overflow-hidden transition-all duration-200 border-t border-neutral-800 ${
+            menuOpen
+              ? 'max-h-64 opacity-100'
+              : 'max-h-0 opacity-0 border-t-0'
+          }`}
+        >
+          <nav
+            aria-label="Mobile Navigation"
+            className="px-4 py-3 bg-[#102A43]"
+          >
+            <a
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation('about');
+              }}
+              className="block py-3 text-sm font-mono text-neutral-300 hover:text-emerald-400 border-b border-neutral-800/70 transition-colors"
+            >
+              {content.about}
+            </a>
+
+            <a
+              href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation('services');
+              }}
+              className="block py-3 text-sm font-mono text-neutral-300 hover:text-emerald-400 border-b border-neutral-800/70 transition-colors"
+            >
+              {content.services}
+            </a>
+
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation('contact');
+              }}
+              className="block py-3 text-sm font-mono text-neutral-300 hover:text-emerald-400 transition-colors"
+            >
+              {content.contact}
+            </a>
+          </nav>
+        </div>
+
       </header>
 
       {/* 2. ENCABEZADO PRINCIPAL */}
@@ -241,7 +363,11 @@ export default function App() {
         </section>
 
         {/* SECCIÓN 3: CONTACTO */}
-        <section id="contact" aria-labelledby="contact-heading" className="space-y-6">
+        <section
+          id="contact"
+          aria-labelledby="contact-heading"
+          className="space-y-6"
+        >
           <h2
             id="contact-heading"
             className="text-xl sm:text-3xl font-bold text-white tracking-tight"
