@@ -47,134 +47,133 @@ export default function App() {
     },
   }[lang];
 
-const handleFormSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const FORMSPREE_ENDPOINT = 'TU_ENDPOINT_DE_FORMSPREE';
+    const FORMSPREE_ENDPOINT = 'TU_ENDPOINT_DE_FORMSPREE';
 
-  try {
-    const response = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      }),
-    });
-
-    if (response.ok) {
-      alert(
-        lang === 'sv'
-          ? 'Tack! Ditt meddelande har skickats.'
-          : 'Thank you! Your message has been sent.'
-      );
-
-      setFormData({
-        name: '',
-        email: '',
-        message: '',
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
       });
-    } else {
+
+      if (response.ok) {
+        alert(
+          lang === 'sv'
+            ? 'Tack! Ditt meddelande har skickats.'
+            : 'Thank you! Your message has been sent.'
+        );
+
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+        });
+      } else {
+        alert(
+          lang === 'sv'
+            ? 'Något gick fel. Försök igen.'
+            : 'Something went wrong. Please try again.'
+        );
+      }
+    } catch (error) {
       alert(
         lang === 'sv'
           ? 'Något gick fel. Försök igen.'
           : 'Something went wrong. Please try again.'
       );
     }
-  } catch (error) {
-    alert(
-      lang === 'sv'
-        ? 'Något gick fel. Försök igen.'
-        : 'Something went wrong. Please try again.'
-    );
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-[#102A43] text-[#E5E7EB] font-sans flex flex-col justify-between selection:bg-emerald-400 selection:text-black">
 
-      {/* 1. BARRA SUPERIOR CON LOGO Y SELECTOR DE <header className="border-b border-neutral-800/80 sticky top-0 bg-[#102A43]/95 backdrop-blur z-30">
-  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 min-h-20 sm:h-20 flex items-center justify-between gap-3">
-    
-    <a
-      href="#"
-      aria-label="DECA Energy - Home"
-      className="flex items-center shrink-0"
-    >
-      <DecaLogo size="sm" theme="dark" />
-    </a>
+      {/* 1. BARRA SUPERIOR CON LOGO Y SELECTOR DE IDIOMA */}
+      <header className="border-b border-neutral-800/80 sticky top-0 bg-[#102A43]/95 backdrop-blur z-30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 min-h-20 sm:h-20 flex items-center justify-between gap-3">
 
-    <div className="flex items-center gap-2 sm:gap-6 min-w-0">
-      
-      <nav
-        aria-label="Main Navigation"
-        className="flex items-center gap-2 sm:gap-6 text-[10px] sm:text-sm font-mono text-neutral-400"
-      >
-        <a
-          href="#about"
-          className="hover:text-emerald-400 py-2 px-0.5 sm:px-1 transition-colors whitespace-nowrap"
-        >
-          {content.about}
-        </a>
+          <a
+            href="#"
+            aria-label="DECA Energy - Home"
+            className="flex items-center shrink-0"
+          >
+            <DecaLogo size="sm" theme="dark" />
+          </a>
 
-        <a
-          href="#services"
-          className="hover:text-emerald-400 py-2 px-0.5 sm:px-1 transition-colors whitespace-nowrap"
-        >
-          {content.services}
-        </a>
+          <div className="flex items-center gap-2 sm:gap-6">
+            <nav
+              aria-label="Main Navigation"
+              className="flex items-center gap-2 sm:gap-6 text-[10px] sm:text-sm font-mono text-neutral-400"
+            >
+              <a
+                href="#about"
+                className="hover:text-emerald-400 py-2 px-1 transition-colors whitespace-nowrap"
+              >
+                {content.about}
+              </a>
 
-        <a
-          href="#contact"
-          className="hover:text-emerald-400 py-2 px-0.5 sm:px-1 transition-colors whitespace-nowrap"
-        >
-          {content.contact}
-        </a>
-      </nav>
+              <a
+                href="#services"
+                className="hover:text-emerald-400 py-2 px-1 transition-colors whitespace-nowrap"
+              >
+                {content.services}
+              </a>
 
-      <div
-        className="flex items-center gap-0.5 bg-neutral-900 border border-neutral-800 rounded-full px-1.5 sm:px-2.5 py-1 text-[10px] sm:text-xs font-mono shrink-0"
-        role="group"
-        aria-label="Language selector"
-      >
-        <button
-          type="button"
-          onClick={() => setLang('sv')}
-          aria-label="Välj svenska"
-          aria-pressed={lang === 'sv'}
-          className={`px-2 sm:px-2.5 py-1 rounded-full transition-colors min-h-[32px] sm:min-h-0 flex items-center justify-center ${
-            lang === 'sv'
-              ? 'bg-emerald-400 text-neutral-950 font-bold'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          SV
-        </button>
+              <a
+                href="#contact"
+                className="hover:text-emerald-400 py-2 px-1 transition-colors whitespace-nowrap"
+              >
+                {content.contact}
+              </a>
+            </nav>
 
-        <span className="text-neutral-600 select-none">/</span>
+            <div
+              className="flex items-center gap-1 bg-neutral-900 border border-neutral-800 rounded-full px-2.5 py-1 text-xs font-mono shrink-0"
+              role="group"
+              aria-label="Language selector"
+            >
+              <button
+                type="button"
+                onClick={() => setLang('sv')}
+                aria-label="Välj svenska"
+                aria-pressed={lang === 'sv'}
+                className={`px-2.5 py-1 rounded-full transition-colors min-h-[32px] sm:min-h-0 flex items-center justify-center ${
+                  lang === 'sv'
+                    ? 'bg-emerald-400 text-neutral-950 font-bold'
+                    : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                SV
+              </button>
 
-        <button
-          type="button"
-          onClick={() => setLang('en')}
-          aria-label="Select English"
-          aria-pressed={lang === 'en'}
-          className={`px-2 sm:px-2.5 py-1 rounded-full transition-colors min-h-[32px] sm:min-h-0 flex items-center justify-center ${
-            lang === 'en'
-              ? 'bg-emerald-400 text-neutral-950 font-bold'
-              : 'text-neutral-400 hover:text-white'
-          }`}
-        >
-          EN
-        </button>
-      </div>
+              <span className="text-neutral-600 select-none">/</span>
 
-    </div>
-  </div>
-</header>
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                aria-label="Select English"
+                aria-pressed={lang === 'en'}
+                className={`px-2.5 py-1 rounded-full transition-colors min-h-[32px] sm:min-h-0 flex items-center justify-center ${
+                  lang === 'en'
+                    ? 'bg-emerald-400 text-neutral-950 font-bold'
+                    : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* 2. ENCABEZADO PRINCIPAL */}
       <section className="border-b border-neutral-800/80 py-12 sm:py-20 md:py-24 bg-gradient-to-b from-[#0e141c] to-[#102A43] text-center px-4 sm:px-6">
