@@ -59,10 +59,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-[#E5E7EB] font-sans flex flex-col justify-between selection:bg-emerald-400 selection:text-black">
+    <div className="min-h-screen bg-[#182A85] text-[#E5E7EB] font-sans flex flex-col justify-between selection:bg-emerald-400 selection:text-black">
 
       {/* 1. BARRA SUPERIOR CON LOGO Y SELECTOR DE IDIOMA */}
-      <header className="border-b border-neutral-800/80 sticky top-0 bg-[#0B1220]/95 backdrop-blur z-30">
+      <header className="border-b border-neutral-800/80 sticky top-0 bg-[#182A85]/95 backdrop-blur z-30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <a href="#" aria-label="DECA Energy - Home" className="flex items-center">
             <DecaLogo size="sm" theme="dark" />
@@ -124,7 +124,7 @@ export default function App() {
       </header>
 
       {/* 2. ENCABEZADO PRINCIPAL */}
-      <section className="border-b border-neutral-800/80 py-12 sm:py-20 md:py-24 bg-gradient-to-b from-[#0e141c] to-[#0B1220] text-center px-4 sm:px-6">
+      <section className="border-b border-neutral-800/80 py-12 sm:py-20 md:py-24 bg-gradient-to-b from-[#0e141c] to-[#182A85] text-center px-4 sm:px-6">
         <div className="max-w-3xl mx-auto flex flex-col items-center space-y-6 sm:space-y-8">
           <DecaLogo size="xl" theme="dark" />
 
