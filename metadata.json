@@ -1,6 +1,5 @@
 {
   "name": "DECA Energy Consulting AB",
-  "description": "Minimalist Swiss typographic personal brand & consulting website for DECA Energy Consulting AB and Daniel Desidera, specializing in PV, BESS, Energy Efficiency, and Market Advisory with Swedish & English bilingual support.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "description": "Professional website for DECA Energy Consulting AB, providing consulting services in solar energy, battery storage, energy efficiency, and energy markets.",
+  "requestFramePermissions": []
 }
