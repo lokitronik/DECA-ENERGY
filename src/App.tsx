@@ -47,16 +47,52 @@ export default function App() {
     },
   }[lang];
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(
-      `Kontaktförfrågan / Contact from ${formData.name || 'DECA Website'}`
+const handleFormSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const FORMSPREE_ENDPOINT = 'TU_ENDPOINT_DE_FORMSPREE';
+
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
+    });
+
+    if (response.ok) {
+      alert(
+        lang === 'sv'
+          ? 'Tack! Ditt meddelande har skickats.'
+          : 'Thank you! Your message has been sent.'
+      );
+
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+    } else {
+      alert(
+        lang === 'sv'
+          ? 'Något gick fel. Försök igen.'
+          : 'Something went wrong. Please try again.'
+      );
+    }
+  } catch (error) {
+    alert(
+      lang === 'sv'
+        ? 'Något gick fel. Försök igen.'
+        : 'Something went wrong. Please try again.'
     );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:daniel@deca-energy.com?subject=${subject}&body=${body}`;
-  };
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#102A43] text-[#E5E7EB] font-sans flex flex-col justify-between selection:bg-emerald-400 selection:text-black">
