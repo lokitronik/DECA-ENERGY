@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DecaLogo } from './components/DecaLogo';
-import { Mail, Phone, MapPin, Globe, Linkedin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Send } from 'lucide-react';
 
 export default function App() {
   const [lang, setLang] = useState<'sv' | 'en'>('sv');
@@ -236,11 +236,6 @@ export default function App() {
                   >
                     linkedin.com/in/danieldesidera
                   </a>
-                </div>
-                <div className="flex items-center gap-3 text-neutral-400">
-                  <Globe className="w-4 h-4 text-neutral-500 shrink-0" />
-                  <span>deca-energy.com</span>
-                </div>
                 <div className="flex items-center gap-3 text-neutral-400">
                   <MapPin className="w-4 h-4 text-neutral-500 shrink-0" />
                   <span>Sweden</span>
