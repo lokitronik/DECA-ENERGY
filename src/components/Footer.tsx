@@ -75,7 +75,7 @@ export const Footer: React.FC<FooterProps> = ({
               <p className="text-white font-medium">DECA ENERGY CONSULTING AB</p>
               <p>Stockholm, Sweden</p>
               <p className="font-mono text-emerald-400">daniel@deca-energy.com</p>
-              <p className="font-mono text-neutral-300">+46 70 004 44 21</p>
+              <p className="font-mono text-neutral-300">+46 XX XXX XX XX</p>
             </div>
           </div>
 
