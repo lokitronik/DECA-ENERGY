@@ -15,7 +15,7 @@ export default function App() {
   const content = {
     sv: {
       slogan: 'Where Energy Meets Markets & People',
-      about: 'Om DECA Energy',
+      about: 'Vem är DECA Energy?',
       services: 'Tjänster',
       contact: 'Kontakt',
       servicesList: [
@@ -31,7 +31,7 @@ export default function App() {
     },
     en: {
       slogan: 'Where Energy Meets Markets & People',
-      about: 'About DECA Energy',
+      about: 'Who is DECA Energy?',
       services: 'Services',
       contact: 'Contact',
       servicesList: [
