@@ -294,11 +294,13 @@ export default function App() {
             {content.about}
           </h2>
 
-          <div className="p-6 sm:p-8 rounded-lg border border-dashed border-neutral-800 bg-neutral-900/30 text-xs sm:text-sm text-neutral-400 font-mono">
-            [ {content.about} ]
+          <div className="p-6 sm:p-8 rounded-lg border border-neutral-800 bg-neutral-900/30">
+            <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+              {content.aboutText}
+            </p>
           </div>
 
-             </section>
+        </section>
 
         {/* SECCIÓN 2: SERVICIOS */}
         <section
