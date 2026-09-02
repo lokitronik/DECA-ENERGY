@@ -1,4 +1,3 @@
-ts
 import { Language, TranslationContent } from './types';
 
 export const translations: Record<Language, TranslationContent> = {
