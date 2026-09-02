@@ -10,7 +10,7 @@ import {
   Menu,
   X,
 } from 'lucide-react';
-import { translations } from './translations';
+import { translations } from './data/translations';
 
 export default function App() {
   const [lang, setLang] = useState<'sv' | 'en'>('sv');
