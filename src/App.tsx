@@ -1,3 +1,4 @@
+tsx
 import React, { useState } from 'react';
 import { DecaLogo } from './components/DecaLogo';
 import {
