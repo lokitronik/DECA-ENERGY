@@ -20,4 +20,7 @@ export interface TranslationContent {
   send: string;
 
   directContact: string;
+
+  formSuccess: string;
+  formError: string;
 }
