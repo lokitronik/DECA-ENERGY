@@ -5,6 +5,9 @@ export const translations: Record<Language, TranslationContent> = {
     slogan: 'Where Energy Meets Markets & People',
 
     about: 'Vem är DECA Energy?',
+    aboutText:
+      'DECA Energy är...',
+
     services: 'Tjänster',
     contact: 'Kontakt',
 
@@ -12,14 +15,20 @@ export const translations: Record<Language, TranslationContent> = {
       {
         title: 'Solenergi (PV)',
         tag: '01',
+        description:
+          '???',
       },
       {
         title: 'Batterilagring (BESS)',
         tag: '02',
+        description:
+          '???',
       },
       {
         title: 'Affärsutveckling & Rådgivning',
         tag: '03',
+        description:
+          '???',
       },
     ],
 
@@ -38,6 +47,9 @@ export const translations: Record<Language, TranslationContent> = {
     slogan: 'Where Energy Meets Markets & People',
 
     about: 'Who is DECA Energy?',
+    aboutText:
+      'DECA Energy is...',
+
     services: 'Services',
     contact: 'Contact',
 
@@ -45,14 +57,20 @@ export const translations: Record<Language, TranslationContent> = {
       {
         title: 'Solar PV',
         tag: '01',
+        description:
+          '???',
       },
       {
         title: 'Battery Storage (BESS)',
         tag: '02',
+        description:
+          '???',
       },
       {
         title: 'Business Development & Advisory',
         tag: '03',
+        description:
+          '???',
       },
     ],
 
