@@ -30,6 +30,9 @@ export const translations: Record<Language, TranslationContent> = {
     send: 'Skicka',
 
     directContact: 'Direktkontakt',
+
+    formSuccess: 'Tack! Ditt meddelande har skickats.',
+    formError: 'Något gick fel. Försök igen.',
   },
 
   en: {
@@ -60,5 +63,8 @@ export const translations: Record<Language, TranslationContent> = {
     send: 'Send',
 
     directContact: 'Direct Contact',
+
+    formSuccess: 'Thank you! Your message has been sent.',
+    formError: 'Something went wrong. Please try again.',
   },
 };
