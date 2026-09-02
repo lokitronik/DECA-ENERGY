@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { DecaLogo } from './components/DecaLogo';
-import { Mail, Phone, MapPin, Linkedin, Send, Menu, X } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Send,
+  Menu,
+  X,
+} from 'lucide-react';
+import { translations } from './translations';
 
 export default function App() {
   const [lang, setLang] = useState<'sv' | 'en'>('sv');
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const content = translations[lang];
 
   // Form state
   const [formData, setFormData] = useState({
@@ -12,41 +23,6 @@ export default function App() {
     email: '',
     message: '',
   });
-
-  const content = {
-    sv: {
-      slogan: 'Where Energy Meets Markets & People',
-      about: 'Vem är DECA Energy?',
-      services: 'Tjänster',
-      contact: 'Kontakt',
-      servicesList: [
-        { title: 'Solenergi (PV)', tag: '01' },
-        { title: 'Batterilagring (BESS)', tag: '02' },
-        { title: 'Affärsutveckling & Rådgivning', tag: '03' },
-      ],
-      name: 'Namn',
-      email: 'E-post',
-      message: 'Meddelande',
-      send: 'Skicka',
-      directContact: 'Direktkontakt',
-    },
-    en: {
-      slogan: 'Where Energy Meets Markets & People',
-      about: 'Who is DECA Energy?',
-      services: 'Services',
-      contact: 'Contact',
-      servicesList: [
-        { title: 'Solar PV', tag: '01' },
-        { title: 'Battery Storage (BESS)', tag: '02' },
-        { title: 'Business Development & Advisory', tag: '03' },
-      ],
-      name: 'Name',
-      email: 'Email',
-      message: 'Message',
-      send: 'Send',
-      directContact: 'Direct Contact',
-    },
-  }[lang];
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,11 +44,7 @@ export default function App() {
       });
 
       if (response.ok) {
-        alert(
-          lang === 'sv'
-            ? 'Tack! Ditt meddelande har skickats.'
-            : 'Thank you! Your message has been sent.'
-        );
+        alert(content.formSuccess);
 
         setFormData({
           name: '',
@@ -80,18 +52,10 @@ export default function App() {
           message: '',
         });
       } else {
-        alert(
-          lang === 'sv'
-            ? 'Något gick fel. Försök igen.'
-            : 'Something went wrong. Please try again.'
-        );
+        alert(content.formError);
       }
     } catch (error) {
-      alert(
-        lang === 'sv'
-          ? 'Något gick fel. Försök igen.'
-          : 'Something went wrong. Please try again.'
-      );
+      alert(content.formError);
     }
   };
 
@@ -188,6 +152,7 @@ export default function App() {
                 EN
               </button>
             </div>
+
           </div>
 
           {/* MOBILE CONTROLS */}
@@ -299,13 +264,17 @@ export default function App() {
 
       {/* 2. ENCABEZADO PRINCIPAL */}
       <section className="border-b border-neutral-800/80 py-12 sm:py-20 md:py-24 bg-gradient-to-b from-[#0e141c] to-[#102A43] text-center px-4 sm:px-6">
+
         <div className="max-w-3xl mx-auto flex flex-col items-center space-y-6 sm:space-y-8">
+
           <DecaLogo size="xl" theme="dark" />
 
           <h1 className="text-base sm:text-xl md:text-2xl font-mono text-emerald-400 tracking-wide font-medium px-2">
             {content.slogan}
           </h1>
+
         </div>
+
       </section>
 
       {/* 3. ESTRUCTURA PRINCIPAL */}
@@ -317,6 +286,7 @@ export default function App() {
           aria-labelledby="about-heading"
           className="space-y-4 border-b border-neutral-800 pb-10 sm:pb-14"
         >
+
           <h2
             id="about-heading"
             className="text-xl sm:text-3xl font-bold text-white tracking-tight"
@@ -327,6 +297,7 @@ export default function App() {
           <div className="p-6 sm:p-8 rounded-lg border border-dashed border-neutral-800 bg-neutral-900/30 text-xs sm:text-sm text-neutral-400 font-mono">
             [ {content.about} ]
           </div>
+
         </section>
 
         {/* SECCIÓN 2: SERVICIOS */}
@@ -335,6 +306,7 @@ export default function App() {
           aria-labelledby="services-heading"
           className="space-y-6 border-b border-neutral-800 pb-10 sm:pb-14"
         >
+
           <h2
             id="services-heading"
             className="text-xl sm:text-3xl font-bold text-white tracking-tight"
@@ -343,11 +315,13 @@ export default function App() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+
             {content.servicesList.map((item, idx) => (
               <div
                 key={idx}
                 className="p-5 sm:p-6 rounded-lg border border-neutral-800 bg-neutral-900/40 space-y-2 hover:border-neutral-700 transition-colors"
               >
+
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-mono text-emerald-400 font-bold">
                     {item.tag}
@@ -357,9 +331,12 @@ export default function App() {
                 <h3 className="font-semibold text-white text-base sm:text-lg">
                   {item.title}
                 </h3>
+
               </div>
             ))}
+
           </div>
+
         </section>
 
         {/* SECCIÓN 3: CONTACTO */}
@@ -368,6 +345,7 @@ export default function App() {
           aria-labelledby="contact-heading"
           className="space-y-6"
         >
+
           <h2
             id="contact-heading"
             className="text-xl sm:text-3xl font-bold text-white tracking-tight"
@@ -377,12 +355,14 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start">
 
-            {/* Formulario */}
+            {/* FORMULARIO */}
             <form
               onSubmit={handleFormSubmit}
               className="space-y-4 bg-neutral-900/40 p-5 sm:p-6 rounded-lg border border-neutral-800"
             >
+
               <div className="space-y-1.5">
+
                 <label
                   htmlFor="contact-name"
                   className="text-xs font-mono text-neutral-300 block"
@@ -397,13 +377,18 @@ export default function App() {
                   placeholder={content.name}
                   value={formData.name}
                   onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
+                    setFormData({
+                      ...formData,
+                      name: e.target.value,
+                    })
                   }
                   className="w-full px-3.5 py-3 sm:py-2.5 bg-neutral-950 border border-neutral-800 rounded text-sm sm:text-base text-white focus:outline-none focus:border-emerald-400 transition-colors"
                 />
+
               </div>
 
               <div className="space-y-1.5">
+
                 <label
                   htmlFor="contact-email"
                   className="text-xs font-mono text-neutral-300 block"
@@ -418,13 +403,18 @@ export default function App() {
                   placeholder={content.email}
                   value={formData.email}
                   onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                    setFormData({
+                      ...formData,
+                      email: e.target.value,
+                    })
                   }
                   className="w-full px-3.5 py-3 sm:py-2.5 bg-neutral-950 border border-neutral-800 rounded text-sm sm:text-base text-white focus:outline-none focus:border-emerald-400 transition-colors"
                 />
+
               </div>
 
               <div className="space-y-1.5">
+
                 <label
                   htmlFor="contact-message"
                   className="text-xs font-mono text-neutral-300 block"
@@ -439,10 +429,14 @@ export default function App() {
                   placeholder={content.message}
                   value={formData.message}
                   onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
+                    setFormData({
+                      ...formData,
+                      message: e.target.value,
+                    })
                   }
                   className="w-full px-3.5 py-3 sm:py-2.5 bg-neutral-950 border border-neutral-800 rounded text-sm sm:text-base text-white focus:outline-none focus:border-emerald-400 resize-none transition-colors"
                 />
+
               </div>
 
               <button
@@ -452,9 +446,10 @@ export default function App() {
                 <span>{content.send}</span>
                 <Send className="w-4 h-4" />
               </button>
+
             </form>
 
-            {/* Datos de contacto directo */}
+            {/* DATOS DE CONTACTO DIRECTO */}
             <div className="p-5 sm:p-6 rounded-lg border border-neutral-800 bg-neutral-900/30 space-y-4 text-xs sm:text-sm font-mono">
 
               <div className="text-neutral-400 uppercase text-[11px] font-bold tracking-wider">
@@ -462,6 +457,7 @@ export default function App() {
               </div>
 
               <div>
+
                 <div className="text-sm sm:text-base font-bold text-white">
                   Daniel Desidera
                 </div>
@@ -473,6 +469,7 @@ export default function App() {
                 <div className="text-neutral-500">
                   DECA ENERGY CONSULTING AB
                 </div>
+
               </div>
 
               <div className="space-y-3 pt-3 border-t border-neutral-800 text-neutral-300">
@@ -483,6 +480,7 @@ export default function App() {
                 </div>
 
                 <div className="flex items-center gap-3">
+
                   <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
 
                   <a
@@ -491,9 +489,11 @@ export default function App() {
                   >
                     daniel@deca-energy.com
                   </a>
+
                 </div>
 
                 <div className="flex items-center gap-3">
+
                   <Linkedin className="w-4 h-4 text-emerald-400 shrink-0" />
 
                   <a
@@ -504,6 +504,7 @@ export default function App() {
                   >
                     linkedin.com/in/danieldesidera
                   </a>
+
                 </div>
 
                 <div className="flex items-center gap-3 text-neutral-400">
@@ -512,9 +513,11 @@ export default function App() {
                 </div>
 
               </div>
+
             </div>
 
           </div>
+
         </section>
 
       </main>
