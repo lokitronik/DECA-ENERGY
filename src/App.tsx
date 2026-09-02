@@ -298,7 +298,7 @@ export default function App() {
             [ {content.about} ]
           </div>
 
-        </section>
+             </section>
 
         {/* SECCIÓN 2: SERVICIOS */}
         <section
@@ -319,7 +319,7 @@ export default function App() {
             {content.servicesList.map((item, idx) => (
               <div
                 key={idx}
-                className="p-5 sm:p-6 rounded-lg border border-neutral-800 bg-neutral-900/40 space-y-2 hover:border-neutral-700 transition-colors"
+                className="p-5 sm:p-6 rounded-lg border border-neutral-800 bg-neutral-900/40 space-y-3 hover:border-neutral-700 transition-colors"
               >
 
                 <div className="flex items-center justify-between">
@@ -331,6 +331,10 @@ export default function App() {
                 <h3 className="font-semibold text-white text-base sm:text-lg">
                   {item.title}
                 </h3>
+
+                <p className="text-sm text-neutral-400 leading-relaxed">
+                  {item.description}
+                </p>
 
               </div>
             ))}
