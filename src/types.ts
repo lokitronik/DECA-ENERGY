@@ -1,4 +1,3 @@
-ts
 export type Language = 'sv' | 'en';
 
 export interface ServiceItem {
